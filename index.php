@@ -1,0 +1,10 @@
+<?php
+session_start();
+ob_start();
+require_once('./function.php');
+include('header.php');
+include('Template/_banner-area.php');
+include('Template/_produk.php');
+include('Template/_produk2.php');
+include('Template/_testimoni.php');
+include('footer.php');
