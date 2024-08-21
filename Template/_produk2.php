@@ -65,7 +65,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 // Mengecek apakah produk sudah ada di keranjang
                 $product_in_cart = $cart->isInCart($id_user, $product['id_produk']);
                 $status_sudah_beli = 0;
-                if (mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT id_detail_penjualan FROM tb_detail_penjualan JOIN tb_penjualan ON tb_penjualan.id_penjualan = tb_detail_penjualan.id_penjualan WHERE id_user = '$id_user' AND id_produk = '$product[id_produk]'"))) $status_sudah_beli = 1;
+                if (mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT id_detail_penjualan FROM tb_detail_penjualan JOIN tb_penjualan ON tb_penjualan.id_penjualan = tb_detail_penjualan.id_penjualan WHERE id_user = '$id_user' AND id_produk = '$product[id_produk]' AND status_penjualan = 'selesai'"))) $status_sudah_beli = 1;
                 // Mengecek stok produk
                 $gambar_produk = $product['gambar_produk'];
                 ?>
