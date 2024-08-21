@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 ?>
                 <div class="item py-2 bg-white m-3 img-fluid">
                     <div class="product font-rale card p-5 card-item" style="height: 421px; position: relative;">
-                        <a class="<?= ($status_sudah_beli ? 'image-sold' : '') ?>" href="detail_produk.php?item=<?= urlencode($product['nama_produk']) ?>">
+                        <a class="<?= ($status_sudah_beli ? 'image-sold' : '') ?>" <?= ($status_sudah_beli ? 'href="#" onclick="return false"' : '') ?> href="detail_produk.php?item=<?= urlencode($product['nama_produk']) ?>">
                             <img src="assets/img/products/<?= $gambar_produk ?>" alt="Image 1" width="150" height="150" style="border-radius: 10px;">
                         </a>
 
