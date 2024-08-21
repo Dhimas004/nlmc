@@ -148,12 +148,12 @@ $id_user = $_SESSION['id_user'];
                                             <td align="center">
                                                 <?php
                                                 if ($status_pembayaran == 'Pembayaran Belum Dicek' || $status_pembayaran == 'Pembayaran Ditolak') {
-                                                    echo "<span style='color: red'>$status_pembayaran</span>";
+                                                    echo "<button class='btn btn-danger btn-sm'>$status_pembayaran</button>";
                                                     if ($status_pembayaran == 'Pembayaran Ditolak') {
                                                         echo "<br /><a href='checkout.php?id=$id_penjualan'>Input Ulang Pembayaran</a>";
                                                     }
                                                 } else {
-                                                    echo "<span style='color: green'>$status_pembayaran</span>";
+                                                    echo "<button class='btn btn-success btn-sm'>$status_pembayaran</button>";
                                                 }
                                                 ?>
                                             </td>
@@ -223,9 +223,9 @@ $id_user = $_SESSION['id_user'];
                                             </td>
                                             <td align="center"><?php
                                                                 if ($status_pembayaran == 'Pembayaran Belum Dicek') {
-                                                                    echo "<span style='color: red'>$status_pembayaran</span>";
+                                                                    echo "<button class='btn btn-danger btn-sm'>$status_pembayaran</button>";
                                                                 } else {
-                                                                    echo "<span style='color: green'>$status_pembayaran</span>";
+                                                                    echo "<button class='btn btn-success btn-sm'>$status_pembayaran</button>";
                                                                 }
                                                                 ?></td>
                                             <td align="right">Rp. <?= number_format(round($total_pembayaran, 0), 0, ',', '.') ?></td>

@@ -72,13 +72,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <?php
                 // Mengecek apakah produk sudah ada di keranjang
                 $product_in_cart = $cart->isInCart($id_user, $product['id_produk']);
-
+                $status_sudah_beli = 0;
+                if (mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT id_detail_penjualan FROM tb_detail_penjualan JOIN tb_penjualan ON tb_penjualan.id_penjualan = tb_detail_penjualan.id_penjualan WHERE id_user = '$id_user' AND id_produk = '$product[id_produk]'"))) $status_sudah_beli = 1;
                 // Mengecek stok produk
                 $gambar_produk = $product['gambar_produk'];
                 ?>
                 <div class="item py-2 bg-white m-3 img-fluid">
                     <div class="product font-rale card p-5 card-item" style="height: 421px; position: relative;">
-                        <a href="detail_produk.php?item=<?= urlencode($product['nama_produk']) ?>">
+                        <a class="<?= ($status_sudah_beli ? 'image-sold' : '') ?>" href="detail_produk.php?item=<?= urlencode($product['nama_produk']) ?>">
                             <img src="assets/img/products/<?= $gambar_produk ?>" alt="Image 1" width="150" height="150" style="border-radius: 10px;">
                         </a>
 
@@ -99,8 +100,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                         <?php
                                         $logged_in = false;
                                         if ($_SESSION['id_user'] != '') $logged_in = true;
+                                        if ($status_sudah_beli) {
                                         ?>
-                                        <button type="submit" name="menarik_submit" class="btn btn-primary font-size-12 mr-2" <?= (!$logged_in ? 'disabled' : '') ?>><?= ($logged_in ? 'Tambah Ke Keranjang' : 'Login Terlebih Dahulu') ?></button>
+                                            <button type="button" class="btn btn-primary font-size-12 mr-2 disabled">SOLD</button>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <button type="submit" name="menarik_submit" class="btn btn-primary font-size-12 mr-2" <?= (!$logged_in ? 'disabled' : '') ?>><?= ($logged_in ? 'Tambah Ke Keranjang' : 'Login Terlebih Dahulu') ?></button>
+                                        <?php
+                                        }
+                                        ?>
+
                                     <?php endif; ?>
                                 </div>
                             </form>

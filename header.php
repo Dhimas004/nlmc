@@ -28,6 +28,35 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+    <style>
+        .image-sold {
+            position: relative;
+            display: inline-block;
+        }
+
+        .image-sold::after {
+            content: "Sold";
+            position: absolute;
+            top: 50%;
+            /* Menempatkan di tengah secara vertikal */
+            left: 50%;
+            /* Menempatkan di tengah secara horizontal */
+            transform: translate(-50%, -50%) rotate(-30deg);
+            /* Memiringkan teks sebesar 45 derajat dan menempatkannya di tengah */
+            background-color: rgba(255, 0, 0, 0.7);
+            /* Latar belakang merah dengan sedikit transparansi */
+            color: white;
+            padding: 10px 30px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 5px;
+            z-index: 10;
+            /* Pastikan elemen ini berada di atas gambar */
+            text-transform: uppercase;
+            /* Menjadikan teks semua huruf besar */
+        }
+    </style>
+
 </head>
 
 <body>
