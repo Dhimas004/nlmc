@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['checkout_submit'])) {
 <section id="products" class="py-3 mb-5 mt-5">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 d-flex flex-column align-items-center">
+            <div class="col-sm-6 d-flex flex-column align-items-center" id="detail-produk">
                 <?php
                 $list_gambar_lainnya = mysqli_query($koneksi, "SELECT * FROM tb_gambar_produk WHERE id_produk = '$product[id_produk]'");
                 if (mysqli_num_rows($list_gambar_lainnya) == 0) {
@@ -119,25 +119,28 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['checkout_submit'])) {
                         <form method="post" action="">
                             <input type="hidden" name="item_id" value="<?= $product['id_produk']; ?>">
                             <input type="hidden" name="qty" value="1">
-                            <button type="submit" name="checkout_submit" class="btn btn-danger form-control"><?= ($id_user == '' ? 'Login Terlebih Dahulu' : 'Checkout') ?></button>
+                            <button type="submit" name="checkout_submit" class="btn btn-danger form-control mb-2"><?= ($id_user == '' ? 'Login Terlebih Dahulu' : 'Checkout') ?></button>
                         </form>
                     </div>
-
                     <div class="col">
                         <form method="post">
-                            <?php $product_in_cart = $cart->isInCart($id_user, $product['id_produk']);
-                            $product_stock = $cart->checkStock($product['id_produk']); ?>
+                            <?php
+                            if (!is_null($id_user)) {
+                                $product_in_cart = $cart->isInCart($id_user, $product['id_produk']);
+                                $product_stock = 1;
+                            ?>
 
-                            <input type="hidden" name="id_produk" value="<?= htmlspecialchars($product['id_produk']); ?>">
-                            <input type="hidden" name="id_user" value="<?= $id_user; ?>">
+                                <input type="hidden" name="id_produk" value="<?= htmlspecialchars($product['id_produk']); ?>">
+                                <input type="hidden" name="id_user" value="<?= $id_user; ?>">
 
-                            <?php if (!$product_stock) : ?>
-                                <button type="button" class="btn btn-danger form-control" disabled>Add to Cart</button>
-                            <?php elseif ($product_in_cart) : ?>
-                                <button type="button" class="btn btn-secondary form-control" disabled>In Cart</button>
-                            <?php else : ?>
-                                <button type="submit" name="detail_produk_submit" class="btn btn-primary form-control" <?= ($id_user == '' ? 'disabled' : '') ?>><?= ($id_user == '' ? 'Login Terlebih Dahulu' : 'Tambah ke Keranjang') ?></button>
-                            <?php endif; ?>
+                                <?php if (!$product_stock) : ?>
+                                    <button type="button" class="btn btn-danger form-control" disabled>Add to Cart</button>
+                                <?php elseif ($product_in_cart) : ?>
+                                    <button type="button" class="btn btn-secondary form-control" disabled>In Cart</button>
+                                <?php else : ?>
+                                    <button type="submit" name="detail_produk_submit" class="btn btn-primary form-control" <?= ($id_user == '' ? 'disabled' : '') ?>><?= ($id_user == '' ? 'Login Terlebih Dahulu' : 'Tambah ke Keranjang') ?></button>
+                            <?php endif;
+                            } ?>
                         </form>
                     </div>
                 </div>
